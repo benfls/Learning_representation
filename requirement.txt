@@ -1,6 +1,9 @@
 numpy
 pandas
 scikit-learn
+gensim
+nltk
+datasets
 keras
 torch
 matplotlib
