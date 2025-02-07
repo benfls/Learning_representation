@@ -1,19 +1,24 @@
-from datasets import load_dataset
-import os
+import re
 
-# Charger le dataset Hugging Face (nécessite d'être authentifié)
-dataset = load_dataset("bigscience-data/roots_fr_wikipedia", split="train")
+# Charger le texte
+input_file = "/../../data/wikipedia_fr.txt"
+output_file = "/../../data/wikipedia_clean.txt"
 
-# Créer le répertoire "data" s'il n'existe pas
-os.makedirs("../../data", exist_ok=True)
+with open(input_file, "r", encoding="utf-8") as f:
+    text = f.readlines()
 
-# Sauvegarde du texte des articles
-output_file = "../../data/wikipedia_fr.txt"
+# Fonction de nettoyage du texte
+def clean_text(text):
+    text = text.lower()  # Convertir en minuscules
+    text = re.sub(r"\s+", " ", text)  # Supprimer espaces multiples
+    text = re.sub(r"[^a-zàâçéèêëîïôûùüÿñæœ ]", "", text)  # Garder lettres et accents
+    return text.strip()
 
+# Nettoyer chaque ligne
+cleaned_text = [clean_text(line) for line in text if line.strip()]
+
+# Sauvegarde
 with open(output_file, "w", encoding="utf-8") as f:
-    for article in dataset:
-        text = article.get("text", "").strip()  # Récupère le texte propre
-        if text:  # Évite les textes vides
-            f.write(text + "\n\n")  # Ajoute un saut de ligne entre articles
+    f.write("\n".join(cleaned_text))
 
-print(f"✅ Dataset sauvegardé dans {output_file}")
+print(f"✅ Texte nettoyé et sauvegardé dans {output_file}")
