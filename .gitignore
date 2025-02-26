@@ -1,6 +1,9 @@
 # Untracked data files
 data/
 
+# Compiled source 
+src/models/word2vec/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
