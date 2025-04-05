@@ -3,6 +3,7 @@ data/
 
 # Compiled source 
 src/models/word2vec/
+src/models/fusion_model
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

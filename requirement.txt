@@ -4,4 +4,5 @@ scikit-learn
 keras
 torch
 matplotlib
+torchvision
 seaborn
